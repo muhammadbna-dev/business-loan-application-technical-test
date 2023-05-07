@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ~/pgsql/data:/var/lib/postgresql/data/
+
+  backend:
+    build:  
+      context: ./backend
+      dockerfile: Dockerfile
+    command: ./run_backend.sh
+    volumes:
+      - .:/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - .env
+
+  frontend:
+    build:  
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: ./run_frontend.sh
+    volumes:
+      - .:/app/
+      - /app/frontend/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000

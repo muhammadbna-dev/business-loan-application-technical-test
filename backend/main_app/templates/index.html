@@ -1,0 +1,13 @@
+{% load render_bundle from webpack_loader %}
+
+<!DOCTYPE html>
+
+<html>
+    <head></head>
+    <body>
+        Hello from HTML backend
+        <div id="app"></div>
+    </body>
+</html>
+
+{% render_bundle 'main' %}
