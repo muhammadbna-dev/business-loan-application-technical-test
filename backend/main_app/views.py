@@ -9,3 +9,8 @@ class MainPage(APIView):
 
     def get(self, _):
         return Response({})
+
+
+class TestAPI(APIView):
+    def get(self, _):
+        return Response({"success": True, "data": "Test API success"})

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework',
     'main_app',
+    'business_loan_application',
 ]
 
 MIDDLEWARE = [
