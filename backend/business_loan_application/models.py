@@ -18,6 +18,6 @@ class LoanApplicationTransaction(models.Model):
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
     application_details = models.JSONField(default=dict)
 
-    def get_appliction_details(self):
+    def get_application_details(self):
          self.refresh_from_db()
          return self.application_details
