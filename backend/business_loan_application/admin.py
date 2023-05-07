@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Applicant, LoanApplicationTransaction
+
+admin.site.register(Applicant)
+admin.site.register(LoanApplicationTransaction)
