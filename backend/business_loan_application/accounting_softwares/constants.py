@@ -1,2 +1,5 @@
 MYOB = "MYOB"
-XERO = "XERO"
+
+SUPPORTED_SOFTWARES = [
+    MYOB,
+]
