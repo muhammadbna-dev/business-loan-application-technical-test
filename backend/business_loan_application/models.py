@@ -52,3 +52,21 @@ class LoanApplicationTransaction(models.Model):
         self.refresh_from_db()
         self.application_details['decision_outcome'] = decision_outcome
         self.save(update_fields=['application_details'])
+
+    def get_pre_assessment_value(self):
+        self.refresh_from_db()
+        return self.get_application_details().get('pre_assessment_value' , '')
+
+    def save_pre_assessment_value(self, pre_assessment_value):
+        self.refresh_from_db()
+        self.application_details['pre_assessment_value'] = pre_assessment_value
+        self.save(update_fields=['application_details'])
+
+    def get_decision_outcome(self):
+        self.refresh_from_db()
+        return self.get_application_details().get('decision_outcome' , '')
+
+    def save_decision_outcome(self, decision_outcome):
+        self.refresh_from_db()
+        self.application_details['decision_outcome'] = decision_outcome
+        self.save(update_fields=['application_details'])

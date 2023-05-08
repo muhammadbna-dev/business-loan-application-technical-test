@@ -115,6 +115,8 @@ class ApiTestCase(TestCase):
         decision_outcome = response_data.get('data', {}).get('decision_outcome', "")
         self.assertEqual(decision_outcome, transaction.get_decision_outcome())
         self.assertEqual(transaction.steps, DECISION_RESULT_SENT_TO_USER_STEP)
+        self.assertTrue(transaction.get_pre_assessment_value())
+        self.assertTrue(transaction.get_decision_outcome())
 
     def test_invalid_submit_application_api(self):
         # Purposely change the step to be an invalid step for this operation

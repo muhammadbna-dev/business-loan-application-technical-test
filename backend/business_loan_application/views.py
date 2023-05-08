@@ -12,6 +12,7 @@ from .constants import (
     DECISION_RESULT_SENT_TO_USER_STEP,
 )
 from .serializers import LoanDetailsSerializer
+from .decision_engine.core import get_decision_outcome
 
 
 def send_json_response(data, success=True, message="Success"):
@@ -119,9 +120,10 @@ class SubmitApplication(APIView):
         transaction.steps = DECISION_REQUESTED_STEP
         transaction.save(update_fields=['steps'])
 
-        # TODO: Create the pre-assessment logic and send to decision engine
-        decision_outcome = "DECISION_OUTCOME"
-        if not decision_outcome:
+        try:
+            decision_outcome = get_decision_outcome(transaction)
+        except Exception as inst:
+            logging.exception(inst)
             return send_json_response({}, success=False, message="An error occurred when submitting the application. Please try again.")
 
         transaction.steps = DECISION_RESULT_SENT_TO_USER_STEP
